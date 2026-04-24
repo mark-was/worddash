@@ -24,9 +24,11 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 BLUE = (4, 49, 97)
 GREEN = (0, 200, 0)
+GREEN2 = (10, 168, 2)
 RED = (220, 0, 0)
-PURPLE = (41, 4, 61)
+PURPLE = (80, 20, 115)
 GREY = (24, 24, 24)
+LIGHT_GREY = (76, 77, 82)
 
 clock = pygame.time.Clock()
 
@@ -53,11 +55,11 @@ def draw_colored_sentence(text, target, x, y):
     for i, char in enumerate(target):
         if i < len(text): 
             if text[i] == char:
-                color = GREEN
+                color = GREEN2
             else:
                 color = RED
         else:
-            color = BLACK
+            color = PURPLE
 
         char_surface = sentence_font.render(char, True, color)
         screen.blit(char_surface, (start_x, y))
@@ -126,7 +128,7 @@ while True:
                         if difficulty == 'easy':
                             difficulty = 'medium'
                             filename = './wordlists/medium_words.txt'
-                            sentence_font = pygame.font.SysFont(None, 60) #change font size to fit on game window per difficulity
+                            sentence_font = pygame.font.SysFont(None, 52) #change font size to fit on game window per difficulity
                         elif difficulty == 'medium':
                             difficulty = 'hard'
                             filename = './wordlists/hard_words.txt'
@@ -182,9 +184,14 @@ while True:
                 else:
                     user_text += event.unicode
     #fill bg color
-    screen.fill(BLUE)
-    #start with game state menu by default
+    #screen.fill(BLUE)
     
+    #set bg image
+    background = pygame.image.load('./images/space.png')
+    background = pygame.transform.scale(background, (WIDTH, HEIGHT))
+    screen.blit(background, (0, 0))
+    
+    #start with game state menu by default
     if game_state == 'menu':
         draw_menu()
         
